@@ -1,14 +1,8 @@
-print("Enter 1-st: ", end=" ")
-num_fizz = int(input())
-
-print("Enter 2-st: ", end=" ")
-num_buzz = int(input())
-
-print("Enter 3-st: ", end=" ")
-num_end_zz = int(input())
+num_fizz = int(input("Enter 1-st (fizz): "))
+num_buzz = int(input("Enter 2-nd (buzz): "))
+num_end_zz = int(input("Enter 3-rd (counters): "))
 
 counters = range(1, (num_end_zz+1))
-
 for counter in counters:
     if not counter % num_fizz:
         print("F", end="")
