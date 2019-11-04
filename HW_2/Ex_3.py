@@ -1,4 +1,6 @@
-def check_buzz():
+def check_buzz(num_buzz, num_check):
+    if num_check % num_buzz == 0:
+        print("B", end="")
     pass
 
 
@@ -12,8 +14,7 @@ for counter in counters:
     if not counter % num_fizz:
         print("F", end="")
     # function for buzz
-    if counter % num_buzz == 0:
-        print("B", end="")
+    check_buzz(num_buzz, counter)
     # function for counter
     if not counter % num_buzz == 0 and counter % num_fizz:
         print(counter, end="")
