@@ -25,4 +25,3 @@ for counter in counters:
     check_counter(num_fizz, num_buzz, counter)
     print("", end=" ")
 print()
-# end
