@@ -6,6 +6,11 @@ def check_buzz(num_buzz, num_check):
 def check_fizz(num_fizz, num_check):
     if not num_check % num_fizz:
         print("F", end="")
+
+
+def check_counter(num_fizz, num_buzz, num_check):
+    if not num_check % num_buzz == 0 and num_check % num_fizz:
+        print(num_check, end="")
     pass
 
 
@@ -17,8 +22,6 @@ counters = range(1, (num_end_zz+1))
 for counter in counters:
     check_buzz(num_buzz, counter)
     check_fizz(num_fizz, counter)
-    # function for counter
-    if not counter % num_buzz == 0 and counter % num_fizz:
-        print(counter, end="")
+    check_counter(num_fizz, num_buzz, counter)
     print("", end=" ")
 print()
