@@ -7,6 +7,7 @@ for counter in counters:
     # function for fizz
     if not counter % num_fizz:
         print("F", end="")
+    # function for buzz
     if counter % num_buzz == 0:
         print("B", end="")
     if not counter % num_buzz == 0 and counter % num_fizz:
