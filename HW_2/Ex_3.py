@@ -1,5 +1,8 @@
+# input first
 num_fizz = int(input("Enter 1-st (fizz): "))
+# input second
 num_buzz = int(input("Enter 2-nd (buzz): "))
+# input Last
 num_end_zz = int(input("Enter 3-rd (counters): "))
 
 counters = range(1, (num_end_zz+1))
