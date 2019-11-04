@@ -16,7 +16,6 @@ for counter in counters:
     # function for buzz
     if counter % num_buzz == 0:
         print("B", end="")
-    # function for counter
     check_counter(num_fizz, num_buzz, counter)
     print("", end=" ")
 print()
