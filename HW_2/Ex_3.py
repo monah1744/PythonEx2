@@ -1,4 +1,6 @@
-def check_fizz():
+def check_fizz(num_fizz, num_check):
+    if not num_check % num_fizz:
+        print("F", end="")
     pass
 
 
@@ -9,8 +11,7 @@ num_end_zz = int(input("Enter 3-rd (counters): "))
 counters = range(1, (num_end_zz+1))
 for counter in counters:
     # function for fizz
-    if not counter % num_fizz:
-        print("F", end="")
+    check_fizz(num_fizz, counter)
     # function for buzz
     if counter % num_buzz == 0:
         print("B", end="")
