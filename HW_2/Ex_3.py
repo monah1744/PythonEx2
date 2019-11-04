@@ -1,3 +1,7 @@
+def check_counter():
+    pass
+
+
 num_fizz = int(input("Enter 1-st (fizz): "))
 num_buzz = int(input("Enter 2-nd (buzz): "))
 num_end_zz = int(input("Enter 3-rd (counters): "))
