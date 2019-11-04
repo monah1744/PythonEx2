@@ -10,7 +10,6 @@ num_end_zz = int(input("Enter 3-rd (counters): "))
 
 counters = range(1, (num_end_zz+1))
 for counter in counters:
-    # function for fizz
     check_fizz(num_fizz, counter)
     # function for buzz
     if counter % num_buzz == 0:
