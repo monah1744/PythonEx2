@@ -38,8 +38,8 @@ try:
                         file_write.write(" ")
                     file_write.write("\n")
         except IOError:
-            print("An IOError has occurred!")
+            print("An IOError has occurred with ", sys.argv[2])
 except IOError:
-    print("An IOError has occurred!")
+    print("An IOError has occurred with ", sys.argv[1])
 except IndexError:
     print("not enough arguments! Would be better if we have two :)")
