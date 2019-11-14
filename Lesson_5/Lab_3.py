@@ -22,5 +22,9 @@ print("Total - ", len(my_lines), "words", end="\n\n\n")
 # i = count_duplicates(my_lines)
 print(my_lines)
 print("", end="\n\n\n")
-[print("Verbs = ", my_lines[i], " ", my_lines.count(my_lines[i]))
- for i, _ in enumerate(my_lines)]
+# [print("Verbs = ", my_lines[i], " ", my_lines.count(my_lines[i]))
+#  for i, _ in enumerate(my_lines)]
+my_lines_uniq = list(set(my_lines))
+my_lines_uniq.sort()
+[print("Verbs - ", i, " = ", my_lines.count(i))
+ for i in my_lines_uniq]
