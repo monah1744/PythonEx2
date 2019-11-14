@@ -2,9 +2,14 @@ import sys
 import re
 
 
+def my_lower(my_str):
+    return my_str.lower()
+
+
 def bring_properly_line(def_lines):
     def_lines = re.findall(r"[^,.!?:\ \n]+", def_lines)
-    def_lines = [my_string.lower() for my_string in def_lines]
+    # def_lines = [my_string.lower() for my_string in def_lines]
+    def_lines = list(map(my_lower, def_lines))
     return def_lines
 
 
