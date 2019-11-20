@@ -1,5 +1,6 @@
 import sys
 with open(sys.argv[1], 'r') as file_read:
+    # with open('/home/inovikov/Documents/A-Level/PythonEx2/Lesson_6/Lab_3.txt', 'r') as file_read:
     for my_line in file_read:
         my_line = my_line.split(";")
         nums_line = list(map(int, my_line[0].split()))
