@@ -20,12 +20,10 @@ def my_sum(list_of_numbers):
     Не использовать встроенные функции суммирования.
 
     """
-    pass
     my_summ = 0
     for my_numm in list_of_numbers:
         my_summ += my_numm
     return my_summ
-    #  ...wite your code here
 
 
 def shortener(string):
@@ -42,7 +40,6 @@ def shortener(string):
      функция должна вместо всех символов после шестого поставить одну звездочку.
      Пример: Из слова 'verwijdering' должно получиться 'verwij*'
     """
-    pass
     my_new_string = ""
     for my_string in string.split():
         if len(my_string) > 6:
@@ -50,7 +47,6 @@ def shortener(string):
         else:
             my_new_string = my_new_string + my_string + " "
     return my_new_string.rstrip()
-    #  ...wite your code here
 
 
 def compare_ends(words):
@@ -68,8 +64,6 @@ def compare_ends(words):
     pass
     counter = 0
     for my_word in words:
-        if len(my_word) >= 2:
-            if my_word[0] == my_word[len(my_word)-1]:
-                counter += 1
+        if len(my_word) >= 2 and my_word[0] == my_word[len(my_word)-1]:
+            counter += 1
     return counter
-    #  ...wite your code here
