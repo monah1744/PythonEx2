@@ -8,7 +8,6 @@ def my_lower(my_str):
 
 def bring_properly_line(def_lines):
     def_lines = re.findall(r"[^,.!?:\ \n]+", def_lines)
-    # def_lines = [my_string.lower() for my_string in def_lines]
     def_lines = list(map(my_lower, def_lines))
     return def_lines
 
