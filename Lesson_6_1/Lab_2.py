@@ -32,7 +32,7 @@ current_dict = prepare_dict(known_size)
 dict_your_choise = dict(
     zip(range(1, len(current_dict)+1), current_dict.keys()))
 [print(kkey, kvalue) for kkey, kvalue in dict_your_choise.items()]
-your_size = input("\nPlease, choose your size : ")
+your_size = int(input("\nPlease, choose your size : "))
 which_size = input("Which kind of size do you want look at? : \n 1 - Talia. \n 2 - Bedra. \n 3 - International \n 4 - Russia. \n 5 - Germany \n 6 - USA \n 7 - France \n 8 - Great Britain \n Make a choice : ")
-print("\nYour size - ", dict_your_choise[int(your_size)], ";\nYou want to look at - ", dict_of_sizes[which_size],
-      "\nConverted size - ", current_dict[dict_your_choise[int(your_size)]][dict_of_sizes[which_size]], "...")
+print("\nYour size - ", dict_your_choise[your_size], ";\nYou want to look at - ", dict_of_sizes[which_size],
+      "\nConverted size - ", current_dict[dict_your_choise[your_size]][dict_of_sizes[which_size]], "...")
