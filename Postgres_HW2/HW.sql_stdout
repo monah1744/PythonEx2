@@ -1,0 +1,139 @@
+teams=# -- INSERT INTO teacher (first_name, last_name) VALUES ('Danil','Ivanov');
+teams=# -- UPDATE teacher SET first_name='Vladislav',last_name='Ponomaryov' WHERE id=3;
+teams=# -- DELETE FROM teacher WHERE id=4;
+teams=# SELECT team.name, subject.name, teacher.first_name, teacher.last_name FROM course INNER JOIN team ON course.team_id=team.id INNER JOIN subject_teacher ON course.subject_teacher_id=subject_teacher.id INNER JOIN subject ON subject.id=subject_teacher.subject_id INNER JOIN teacher ON teacher.id=subject_teacher.teacher_id;
+    name    |         name          | first_name | last_name 
+------------+-----------------------+------------+-----------
+ python_Ex2 | Python - introduction | Daniil     | Marynich
+ python_Ex2 | Postgresql            | Yevgeniy   |  
+(2 rows)
+
+teams=# 
+teams=# SELECT * FROM student ORDER BY first_name;
+ id | first_name | last_name  | team_id 
+----+------------+------------+---------
+  3 | Anatoliy   | Laktionov  |       5
+  5 | Dmitriy    | Miller     |       5
+  2 | Dmitriy    | Shmatko    |       5
+  4 | Dmytro     | Hoi        |       5
+  1 | Ivan       | Novikov    |       5
+  7 | Marina     | Laktionova |       5
+  8 | Mike       | Ivanov     |       5
+ 11 | Mykhailo   | Havrilenko |       5
+  9 | Pavel      | Lazarev    |       5
+  6 | Roman      | Lavro      |       5
+ 10 | Sveta      | Podtiaroba |       5
+(11 rows)
+
+teams=# 
+teams=# SELECT count(*), first_name FROM student WHERE first_name like 'D%' GROUP BY first_name ORDER BY first_name ;
+ count | first_name 
+-------+------------
+     2 | Dmitriy
+     1 | Dmytro
+(2 rows)
+
+teams=# 
+teams=# SELECT count(*), first_name FROM student WHERE first_name like 'D%' GROUP BY first_name HAVING count(*)>1 ORDER BY first_name ;
+ count | first_name 
+-------+------------
+     2 | Dmitriy
+(1 row)
+
+teams=# 
+teams=# SELECT count(*),name FROM student INNER JOIN team ON student.team_id=team.id WHERE team_id='5' GROUP BY name;
+ count |    name    
+-------+------------
+    11 | python_Ex2
+(1 row)
+
+teams=# 
+teams=# -- SELECT * FROM teacher;
+teams=# --  UPDATE teacher SET first_name='Daniil',last_name='Marynich' WHERE id='2';
+teams=# 
+teams=# SELECT first_name,last_name,name FROM student INNER JOIN team ON student.team_id=team.id WHERE team_id='5' ORDER BY first_name,last_name LIMIT 5 OFFSET 3;
+ first_name | last_name  |    name    
+------------+------------+------------
+ Dmytro     | Hoi        | python_Ex2
+ Ivan       | Novikov    | python_Ex2
+ Marina     | Laktionova | python_Ex2
+ Mike       | Ivanov     | python_Ex2
+ Mykhailo   | Havrilenko | python_Ex2
+(5 rows)
+
+teams=# 
+teams=# 
+teams=# 
+teams=# SELECT * FROM student FETCH NEXT ROW ONLY ;
+ id | first_name | last_name | team_id 
+----+------------+-----------+---------
+  1 | Ivan       | Novikov   |       5
+(1 row)
+
+teams=# 
+teams=# SELECT * FROM student ORDER BY first_name FETCH NEXT 5 ROW ONLY ;
+ id | first_name | last_name | team_id 
+----+------------+-----------+---------
+  3 | Anatoliy   | Laktionov |       5
+  5 | Dmitriy    | Miller    |       5
+  2 | Dmitriy    | Shmatko   |       5
+  4 | Dmytro     | Hoi       |       5
+  1 | Ivan       | Novikov   |       5
+(5 rows)
+
+teams=# 
+teams=# SELECT * FROM student ORDER BY first_name OFFSET 3 ROWS FETCH NEXT 5 ROW ONLY ;
+ id | first_name | last_name  | team_id 
+----+------------+------------+---------
+  4 | Dmytro     | Hoi        |       5
+  1 | Ivan       | Novikov    |       5
+  7 | Marina     | Laktionova |       5
+  8 | Mike       | Ivanov     |       5
+ 11 | Mykhailo   | Havrilenko |       5
+(5 rows)
+
+teams=# 
+teams=# -- CREATE TABLE student_snap AS TABLE student WITH NO DATA;
+teams=# -- INSERT INTO student_snap SELECT * FROM student;
+teams=# SELECT * FROM student_snap;
+ id | first_name | last_name  | team_id 
+----+------------+------------+---------
+  1 | Ivan       | Novikov    |       5
+  2 | Dmitriy    | Shmatko    |       5
+  3 | Anatoliy   | Laktionov  |       5
+  4 | Dmytro     | Hoi        |       5
+  5 | Dmitriy    | Miller     |       5
+  6 | Roman      | Lavro      |       5
+  7 | Marina     | Laktionova |       5
+  8 | Mike       | Ivanov     |       5
+  9 | Pavel      | Lazarev    |       5
+ 10 | Sveta      | Podtiaroba |       5
+ 11 | Mykhailo   | Havrilenko |       5
+(11 rows)
+
+teams=# TRUNCATE TABLE student_snap;
+TRUNCATE TABLE
+teams=# SELECT * FROM student_snap;
+ id | first_name | last_name | team_id 
+----+------------+-----------+---------
+(0 rows)
+
+teams=# INSERT INTO student_snap SELECT * FROM student;
+INSERT 0 11
+teams=# SELECT * FROM student_snap;
+ id | first_name | last_name  | team_id 
+----+------------+------------+---------
+  1 | Ivan       | Novikov    |       5
+  2 | Dmitriy    | Shmatko    |       5
+  3 | Anatoliy   | Laktionov  |       5
+  4 | Dmytro     | Hoi        |       5
+  5 | Dmitriy    | Miller     |       5
+  6 | Roman      | Lavro      |       5
+  7 | Marina     | Laktionova |       5
+  8 | Mike       | Ivanov     |       5
+  9 | Pavel      | Lazarev    |       5
+ 10 | Sveta      | Podtiaroba |       5
+ 11 | Mykhailo   | Havrilenko |       5
+(11 rows)
+
+teams=# 
