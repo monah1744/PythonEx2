@@ -16,3 +16,5 @@ SELECT * FROM student FULL JOIN team ON student.team_id=team.id WHERE student.te
 SELECT * FROM student FULL JOIN team ON student.team_id=team.id WHERE student.team_id IS NOT NULL AND team.id IS NOT NULL AND left(first_name, 1) ='D' LIMIT 2;
 
 SELECT * FROM student FULL JOIN team ON student.team_id=team.id WHERE student.team_id IS NOT NULL AND team.id IS NOT NULL AND left(first_name, 1) ='D' LIMIT 2 OFFSET 1;
+
+SELECT count(*), left(first_name,1) as first_initial FROM student LEFT JOIN team ON student.team_id=team.id GROUP BY left(first_name,1) ORDER BY left(first_name,1);
