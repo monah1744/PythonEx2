@@ -1,0 +1,98 @@
+Kuzma /home/monah1744 # su postgres
+sh-4.4$ pg_dump teams > /tmp/dump_team.sql
+sh-4.4$ psql
+psql (12.1)
+Type "help" for help.
+
+postgres=# \l
+                                 List of databases
+   Name    |  Owner   | Encoding |  Collate   |   Ctype    |   Access privileges   
+-----------+----------+----------+------------+------------+-----------------------
+ less_02   | postgres | UTF8     | en_US.utf8 | en_US.utf8 | 
+ postgres  | postgres | UTF8     | en_US.utf8 | en_US.utf8 | 
+ teams     | postgres | UTF8     | en_US.utf8 | en_US.utf8 | 
+ template0 | postgres | UTF8     | en_US.utf8 | en_US.utf8 | =c/postgres          +
+           |          |          |            |            | postgres=CTc/postgres
+ template1 | postgres | UTF8     | en_US.utf8 | en_US.utf8 | postgres=CTc/postgres+
+           |          |          |            |            | =c/postgres
+(5 rows)
+
+postgres=# \c team
+FATAL:  database "team" does not exist
+Previous connection kept
+postgres=# \c teams
+You are now connected to database "teams" as user "postgres".
+teams=# SELECT * FROM student RIGHT JOIN team ON student.team_id=team.id;
+ id | first_name | last_name  | team_id | id |    name    
+----+------------+------------+---------+----+------------
+  1 | Ivan       | Novikov    |       5 |  5 | python_Ex2
+  2 | Dmitriy    | Shmatko    |       5 |  5 | python_Ex2
+  3 | Anatoliy   | Laktionov  |       5 |  5 | python_Ex2
+  4 | Dmytro     | Hoi        |       5 |  5 | python_Ex2
+  5 | Dmitriy    | Miller     |       5 |  5 | python_Ex2
+  6 | Roman      | Lavro      |       5 |  5 | python_Ex2
+  7 | Marina     | Laktionova |       5 |  5 | python_Ex2
+  8 | Mike       | Ivanov     |       5 |  5 | python_Ex2
+  9 | Pavel      | Lazarev    |       5 |  5 | python_Ex2
+ 10 | Sveta      | Podtiaroba |       5 |  5 | python_Ex2
+ 11 | Mykhailo   | Havrilenko |       5 |  5 | python_Ex2
+    |            |            |         |  4 | python_Ex1
+    |            |            |         |  3 | python
+(13 rows)
+
+teams=# SELECT * FROM student LEFT JOIN team ON student.team_id=team.id;
+ id | first_name | last_name  | team_id | id |    name    
+----+------------+------------+---------+----+------------
+  1 | Ivan       | Novikov    |       5 |  5 | python_Ex2
+  2 | Dmitriy    | Shmatko    |       5 |  5 | python_Ex2
+  3 | Anatoliy   | Laktionov  |       5 |  5 | python_Ex2
+  4 | Dmytro     | Hoi        |       5 |  5 | python_Ex2
+  5 | Dmitriy    | Miller     |       5 |  5 | python_Ex2
+  6 | Roman      | Lavro      |       5 |  5 | python_Ex2
+  7 | Marina     | Laktionova |       5 |  5 | python_Ex2
+  8 | Mike       | Ivanov     |       5 |  5 | python_Ex2
+  9 | Pavel      | Lazarev    |       5 |  5 | python_Ex2
+ 10 | Sveta      | Podtiaroba |       5 |  5 | python_Ex2
+ 11 | Mykhailo   | Havrilenko |       5 |  5 | python_Ex2
+(11 rows)
+
+teams=# SELECT * FROM student RIGHT JOIN team ON student.team_id=team.id WHERE student.team_id IS NULL or team.id IS NULL;
+ id | first_name | last_name | team_id | id |    name    
+----+------------+-----------+---------+----+------------
+    |            |           |         |  4 | python_Ex1
+    |            |           |         |  3 | python
+(2 rows)
+
+teams=# 
+teams=# SELECT * FROM student FULL JOIN team ON student.team_id=team.id WHERE student.team_id IS NOT NULL AND team.id IS NOT NULL;
+ id | first_name | last_name  | team_id | id |    name    
+----+------------+------------+---------+----+------------
+  1 | Ivan       | Novikov    |       5 |  5 | python_Ex2
+  2 | Dmitriy    | Shmatko    |       5 |  5 | python_Ex2
+  3 | Anatoliy   | Laktionov  |       5 |  5 | python_Ex2
+  4 | Dmytro     | Hoi        |       5 |  5 | python_Ex2
+  5 | Dmitriy    | Miller     |       5 |  5 | python_Ex2
+  6 | Roman      | Lavro      |       5 |  5 | python_Ex2
+  7 | Marina     | Laktionova |       5 |  5 | python_Ex2
+  8 | Mike       | Ivanov     |       5 |  5 | python_Ex2
+  9 | Pavel      | Lazarev    |       5 |  5 | python_Ex2
+ 10 | Sveta      | Podtiaroba |       5 |  5 | python_Ex2
+ 11 | Mykhailo   | Havrilenko |       5 |  5 | python_Ex2
+(11 rows)
+
+teams=# 
+teams=# SELECT team.name as team, subject.name as subject, teacher.first_name || ' ' || teacher.last_name as teacher FROM course 
+teams-# FULL JOIN team ON course.team_id=team.id 
+teams-# FULL JOIN subject_teacher ON course.subject_teacher_id=subject_teacher.id 
+teams-# FULL JOIN subject ON subject.id=subject_teacher.subject_id 
+teams-# FULL JOIN teacher ON teacher.id=subject_teacher.teacher_id ORDER BY team.name;
+    team    |        subject        |       teacher        
+------------+-----------------------+----------------------
+ python     |                       | 
+ python_Ex1 |                       | 
+ python_Ex2 | Postgresql            | Yevgeniy  
+ python_Ex2 | Python - introduction | Daniil Marynich
+            |                       | Vladislav Ponomaryov
+(5 rows)
+
+teams=# 
