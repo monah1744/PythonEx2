@@ -1,0 +1,33 @@
+module1=# SELECT 'This is '|| name || ', ' || CASE WHEN gender THEN 'she ' ELSE 'he ' END || 'has email '||email AS info FROM m_user;
+                         info                         
+------------------------------------------------------
+ This is Aaron, he has email Aaron@gmail.com
+ This is Nifont, he has email Nifont@gmail.com
+ This is Favst, he has email Favst@gmail.com
+ This is Liodor, he has email Liodor@gmail.com
+ This is Terentiy, he has email Terentiy@gmail.com
+ This is Denis, he has email Denis@gmail.com
+ This is Ovdokim, he has email Ovdokim@gmail.com
+ This is Elisey, he has email Elisey@gmail.com
+ This is Gennadiy, he has email Gennadiy@gmail.com
+ This is Harisiy, he has email Harisiy@gmail.com
+ This is Kira, she has email Kira@gmail.com
+ This is Olimpiada, she has email Olimpiada@gmail.com
+ This is Vladlena, she has email Vladlena@gmail.com
+ This is Inessa, she has email Inessa@gmail.com
+ This is Praskovya, she has email Praskovya@gmail.com
+ This is Lidiya, she has email Lidiya@gmail.com
+ This is Zoya, she has email Zoya@gmail.com
+ This is Iraida, she has email Iraida@gmail.com
+ This is Kristina, she has email Kristina@gmail.com
+ This is Beatrisa, she has email Beatrisa@gmail.com
+(20 rows)
+
+module1=# 
+module1=# SELECT count(city_id), m_city.title from m_user INNER JOIN m_city ON m_city.id=m_user.city_id GROUP BY city_id, m_city.title HAVING count(city_id)>10;
+ count |  title  
+-------+---------
+    11 | Kharkiv
+(1 row)
+
+module1=# 
