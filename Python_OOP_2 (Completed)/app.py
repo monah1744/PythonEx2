@@ -17,10 +17,8 @@ class Employee:
             month_start = date(now.year, now.month, 1)
             weekend = [5, 6]
             diff = (now - month_start).days + 1
-            # print(now, month_start, diff)
             days = 0
             for day in range(diff):
-                # print((month_start + timedelta(day)).weekday())
                 if (month_start + timedelta(day)).weekday() not in weekend:
                     days += 1
         return self.salary_day*days
