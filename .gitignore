@@ -3,5 +3,4 @@
 .idea
 .vscode
 __pycache__
-.code-workspace
-OOP_3.code-workspace
+*.code-workspace
