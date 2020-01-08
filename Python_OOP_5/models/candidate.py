@@ -14,5 +14,8 @@ class Candidate(Employee):
         self.main_skill = main_skill
         self.main_skill_grade = main_skill_grade
 
+    @classmethod
+    def from_csv_file(cls,file_name):
+
     def work(self):
         raise UnableToWorkException("It can't work")
