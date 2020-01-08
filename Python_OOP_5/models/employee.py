@@ -4,9 +4,7 @@ from datetime import date, timedelta
 class Employee:
     def __init__(self, full_name, email, phone=None, salary_day=None):
         self.full_name = full_name
-        self.validate(email)
         self.email = email
-        self.save_email_to_file()
         self.phone = phone
         self.salary_day = salary_day
 
@@ -47,21 +45,6 @@ class Employee:
 
     def __neq__(self, other):
         return self.salary_day != other.salary_day
-
-    def save_email_to_file(self):
-        with open("email", 'a') as f:
-            f.write(self.email)
-            f.write('\n')
-
-    def get_mails_from_file(self):
-        with open("email", 'a+') as f:
-            f.seek(0)
-            data = f.read()
-        return data.split('\n')
-
-    def validate(self, email):
-        if email in self.get_mails_from_file():
-            raise ValueError
 
     @property
     def get_property(self):
