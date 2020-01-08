@@ -1,8 +1,8 @@
 from models.candidate import Candidate
+from models.employee import Employee
 from models.programmer import Programmer
 from models.recruiter import Recruiter
 from models.vacancy import Vacancy
-from models.employee import Employee
 
 
 first_P = Programmer("Ivan Novikov", "email1@gmail.com", "050", 30)

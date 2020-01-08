@@ -65,7 +65,7 @@ class Employee:
 
     @property
     def get_property(self):
-        return f"{self.__class__.__name__}, {self.full_name}, {str(self.check_salary())}"
+        return f"{self.__class__.__name__}, {self.full_name}, {str(self.check_work_days())}"
 
 
 print('entry Employee')
