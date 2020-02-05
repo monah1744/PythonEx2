@@ -1,52 +1,142 @@
 let $field = document.getElementById('field');
 let ctx = $field.getContext('2d');
 
+class Point {
 
-let head = [10, 10];
-let dir = [10, 0];
+    constructor(x = 0, y = 0) {
+        this.x = x;
+        this.y = y;
+    }
 
-let body = [[10, 10], [20, 10], [30, 10]];
-let cherry = [50, 50];
+    isEqual(another) {
+        return this.x === another.x && this.y === another.y;
+    }
 
-function move(head, dir) {
-    return [head[0] + dir[0], head[1] + dir[1]];
+    add(another) {
+        return new Point(this.x + another.x, this.y + another.y);
+    }
+
+    static getRandom() {
+        return new Point(Math.ceil(Math.random() * 49) * 10, Math.ceil(Math.random() * 49) * 10);
+    }
+
+    isOpposite(another) {
+        return (this.x + another.x === 0) && (this.y + another.y === 0);
+    }
 }
-setInterval(function () {
+
+class Snake {
+    constructor(body) {
+        this.body = body;
+    }
+
+    getHead() {
+        return this.body[0];
+    }
+
+    add(point) {
+        this.body.unshift(snake.getHead().add(point));
+    }
+
+    move(point) {
+        let head = this.getHead().add(dir);
+        if (head.x < 0) {
+            head.x = 490;
+        }
+        if (head.x > 490) {
+            head.x = 0;
+        }
+        if (head.y < 0) {
+            head.y = 490;
+        }
+        if (head.y > 490) {
+            head.y = 0;
+        }
+        this.body.unshift(head);
+        this.body.pop();
+    }
+}
+
+class Direction extends Point {
+    move(another) {
+        if (!this.isOpposite(another)) {
+            this.x = another.x;
+            this.y = another.y;
+        }
+    }
+}
+
+let dir = new Direction(10, 0);
+
+let snake = new Snake([
+    new Point(30, 10),
+    new Point(20, 10),
+    new Point(10, 10),
+]);
+
+let cherry = new Point(-10, -10);
+let food = new Point(100, 100);
+
+
+let loopId = setInterval(function () {
     ctx.clearRect(0, 0, 500, 500);
-    if (body[0][0] === cherry[0] && body[0][1] === cherry[1]) {
-        cherry = [-10, 10];
-        body.unshift(move(body[0], dir));
+
+    if (snake.getHead().isEqual(cherry)) {
+        cherry = new Point(-10, -10);
+        snake.add(dir);
+        snake.add(dir);
+    } else if (snake.getHead().isEqual(food)) {
+        food = Point.getRandom();
+        snake.add(dir);
+    } else {
+        snake.move(dir);
     }
-    else {
-        body.unshift(move(body[0], dir));
-        body.pop();
-    }
+
     ctx.fillStyle = 'red';
-    ctx.fillRect(cherry[0], cherry[1], 10, 10);
+    ctx.fillRect(cherry.x, cherry.y, 10, 10);
+
+    ctx.fillStyle = 'green';
+    ctx.fillRect(food.x, food.y, 10, 10);
+
     ctx.fillStyle = 'black';
-    for (let block of body) {
-        ctx.fillRect(block[0], block[1], 10, 10);
+    for (let block of snake.body) {
+        ctx.fillRect(block.x, block.y, 10, 10);
     }
-}, 200);
+
+    for (let element of snake.body.slice(1)) {
+        if (element.isEqual(snake.getHead())) {
+            alert('Game over');
+            clearInterval(loopId);
+        }
+    }
+
+    ctx.fillText('dfgfdgdf', snake.getHead().x + 10, snake.getHead().y - 10);
+
+
+}, 100);
+
 
 setInterval(function () {
-    cherry[0] = Math.random() * 500;
-    cherry[1] = Math.random() * 500;
-}, 20000);
+    cherry = Point.getRandom();
+}, 5000);
+
 
 document.addEventListener('keydown', function (event) {
+
     switch (event.key) {
         case 'ArrowRight':
-            dir = [10, 0];
+            dir.move(new Point(10, 0));
             break;
         case 'ArrowLeft':
-            dir = [-10, 0];
+            dir.move(new Point(-10, 0));
             break;
         case 'ArrowUp':
-            dir = [0, -10];
+            dir.move(new Point(0, -10));
             break;
         case 'ArrowDown':
-            dir = [0, 10];
+            dir.move(new Point(0, 10));
             break;
     }
-})
+});
+
+let socket = io('http://192.168.2.181:3000');
