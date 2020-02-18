@@ -141,18 +141,45 @@
 // });
 
 
-let socket = io('http://192.168.2.181:3000');
+let socket = io('http://localhost:3000');
 let $field = document.getElementById('field');
 let ctx = $field.getContext('2d');
+let $list = document.getElementById('list');
+let name = 'monah1744';
+let color = 'green';
 
-socket.on('render', function (snake) {
+socket.on('render', function (data) {
+
     ctx.clearRect(0, 0, 500, 500);
-    snake = JSON.parse(snake);
-    for (let element of snake.body) {
-        ctx.fillRect(element.x, element.y, 10, 10);
+    data = JSON.parse(data);
+    let clients = data.clients;
+
+    ctx.fillStyle = 'red';
+    ctx.fillRect(data.cherry.x, data.cherry.y, 10, 10);
+
+    ctx.fillStyle = 'green';
+    ctx.fillRect(data.food.x, data.food.y, 10, 10);
+
+    $list.innerHTML = '';
+    for (let client in clients) {
+        let snake = clients[client].snake;
+        ctx.fillStyle = snake.color;
+        for (let element of snake.body) {
+            ctx.fillRect(element.x, element.y, 10, 10);
+        }
+        ctx.fillStyle = 'black';
+
+
+        ctx.fillText(snake.name, snake.body[0].x + 10, snake.body[0].y - 10);
+
+        $list.innerHTML += `<li class="list-group-item">${snake.name}: ${snake.body.length}</li>`
     }
+
 });
 
 document.addEventListener('keydown', function (event) {
     socket.emit('move', event.key);
 });
+
+socket.emit('setName', name);
+socket.emit('setColor', color);
