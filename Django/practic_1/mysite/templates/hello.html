@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hello</title>
+</head>
+<body>
+    Hello friend!!!
+    <div>
+    <div style="border: 1px darkblue solid">
+        {{ my_num }}
+    </div>
+    <div style="border: 1px darkseagreen solid">
+        {{ my_str }}
+    </div>
+    <div style="border: 1px fuchsia solid">
+        {{ my_set }}
+    </div>
+    <div style="border: 1px firebrick solid">
+        {{ my_dict.some_key }}
+    </div>
+
+    <div style="border: 1px cyan solid">
+        {{ my_class.string }}
+    </div>
+    <div style="border: 1px cyan solid">
+        {{ my_list.0 }}
+    </div>
+    <div style="border: 1px burlywood solid">
+        {{ my_tuple.1 }}
+    </div>
+</div>
+<a href="{% url 'user' %}" >user page</a>
+</body>
+</html>
