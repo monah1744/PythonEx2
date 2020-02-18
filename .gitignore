@@ -2,5 +2,6 @@
 /workspace.xml
 .idea
 .vscode
+.venv
 __pycache__
 *.code-workspace

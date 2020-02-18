@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div style="padding: 20px; background-color: chocolate"> Extended template index2!</div>
+    <a href="{% url 'index1' %}">To the index1 page</a>
+    <div>
+        {% for number in number_list %}
+            {% comment %} {% if number|divisibleby:2 %} {{number}}{% endif %} {% endcomment %}
+            {%widthratio number 2 1 %}
+        {% endfor %}
+    </div>
+    <div>{{number_list}}</div>
+
+    {% include 'add.html' %}
+{% endblock %}
