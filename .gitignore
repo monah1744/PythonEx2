@@ -6,3 +6,4 @@
 .env
 __pycache__
 *.code-workspace
+db.sqlite3
