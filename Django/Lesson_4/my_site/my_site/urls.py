@@ -16,6 +16,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from authentication import views
+from my_app import views as portal_views
+
 urlpatterns = [
     path('admin/', admin.site.urls),
+    # path('login', views.login_view),
+    path('login', views.LoginView.as_view()),
+    path('logout', views.LogoutView.as_view(), name='logout'),
+    path('articles', views.ArticleListView.as_view(), name='article'),
+    path('', portal_views.index)
 ]

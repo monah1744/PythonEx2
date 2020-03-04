@@ -11,7 +11,7 @@ class CommentsInline(admin.TabularInline):
 
 class ArticleAdmin(admin.ModelAdmin):
     search_fields = ['title']
-    list_display = ['title', 'is_deleted', 'author']
+    list_display = ['id', 'title', 'is_deleted', 'author']
     list_display_link = ['title', ]
     # list_editable = ['title']
     inlines = [CommentsInline]

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+    <title>LOGIN</title>
+</head>
+
+<body>
+    <form action="" method="POST">
+        {% csrf_token %}
+        <!-- <label for="username">Username</label>
+        <input id="username" type="text" name="username" required="required" />
+        <br />
+        <br />
+        <label for="password">Password</label>
+        <input id="password" type="password" name="password" required="required" />
+        <br />
+        <br /> -->
+        {{ form.as_p }}
+        <button type="submit">LOGIN</button>
+    </form>
+</body>
+
+</html>

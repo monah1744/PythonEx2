@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'my_app',
+    'authentication',
 ]
 
 MIDDLEWARE = [
@@ -133,3 +134,4 @@ STATIC_URL = '/static/'
 
 
 AUTH_USER_MODEL = 'my_app.PortalUser'
+LOGIN_URL = '/login'
